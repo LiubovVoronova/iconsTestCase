@@ -1,0 +1,21 @@
+<div class="icons-container">
+  <input type="text"
+         placeholder="Search by icon name"
+         (keyup)="onInput($event)">
+  <div class="button-container">
+    <button class="btn-default" type="button" value="default" (click)="onColorChange($event)">Default</button>
+    <button class="btn-blue" type="button" value="blue" (click)="onColorChange($event)">Blue</button>
+    <button class="btn-green" type="button" value="green" (click)="onColorChange($event)">Green</button>
+    <button class="btn-red" type="button" value="red" (click)="onColorChange($event)">Red</button>
+    <button class="btn-orange" type="button" value="orange" (click)="onColorChange($event)">Orange</button>
+  </div>
+
+  <div class="group-container" *ngFor="let iconWidth of uniqueWidthSet" >
+    <h3 *ngIf="iconsList.length != 0">Size {{ iconWidth }} </h3>
+    <div class="icons-group" *ngFor="let icon of getWidthGroup(iconWidth)">
+      <span class="single-icon" [innerHTML]="icon.tag"></span>
+      <p class="single-icon-name">{{icon.name}}</p>
+    </div>
+  </div>
+
+</div>

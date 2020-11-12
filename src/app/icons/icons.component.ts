@@ -9,10 +9,9 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./icons.component.css']
 })
 export class IconsComponent implements OnInit {
-
-  size8Group = [];
-  size16Group = [];
-  size24Group = [];
+  iconsList = [];
+  fullIconList = [];
+  uniqueWidthSet;
 
   constructor(private sanitizer: DomSanitizer) { }
 
@@ -20,32 +19,50 @@ export class IconsComponent implements OnInit {
     for (const [key, value] of Object.entries(BASIC_ICONS)) {
       const iconObject = {
         name: '',
-        tag: undefined
+        tag: undefined,
+        width: '',
       };
       iconObject.name = key;
       iconObject.tag = this.sanitizer.bypassSecurityTrustHtml(value);
 
       const findWidth = /(?<=width=")\d+/g.exec(value);
-      let iconWidth: string;
       if (findWidth !== null) {
-        iconWidth = findWidth[0];
+        iconObject.width = findWidth[0];
       }
-
-      switch (iconWidth) {
-        case '8':
-          this.size8Group.push(iconObject);
-          break;
-        case '16':
-          this.size16Group.push(iconObject);
-          break;
-        case '24':
-          this.size24Group.push(iconObject);
+      this.fullIconList.push(iconObject);
+    }
+    this.iconsList = this.fullIconList.slice();
+    this.createWidthSet();
+  }
+  createWidthSet() {
+    const widthArr = [];
+    for (const item of this.fullIconList) {
+      if (item.width !== '') {
+        widthArr.push(item.width);
       }
     }
+    this.uniqueWidthSet = new Set(widthArr);
   }
 
-  onSearch() {
+  onInput(event: any) {
+    const searchInput = event.target.value;
 
+    let filteredList = [];
+    if (searchInput === '') {
+      filteredList = this.fullIconList;
+    } else {
+      filteredList = this.fullIconList.filter(item => item.name.includes(searchInput));
+    }
+    this.iconsList = filteredList;
+    this.createWidthSet();
+  }
+
+  getWidthGroup(iconWidth) {
+    return this.iconsList.filter(item => item.width === iconWidth);
+  }
+
+  onColorChange(event) {
+    console.log(event.target.value)
   }
 
 }

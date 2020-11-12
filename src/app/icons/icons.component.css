@@ -1,0 +1,49 @@
+.icons-container {
+  padding-left: 25px;
+  padding-top: 25px;
+}
+.group-container {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.icons-group {
+  display: flex;
+  padding: 5px 25px 5px 0;
+  width: 180px;
+}
+.single-icon {
+  padding: 0 8px;
+}
+h3 {
+  width: 100vw;
+}
+input {
+  height: 20px;
+  margin: 2px;
+}
+
+.button-container {
+  float: right;
+  margin-right: 10%;
+}
+.btn-default {
+  background-color: #d8d8d8;
+}
+.btn-blue {
+  background-color: #0098db;
+  color: white;
+}
+.btn-green {
+  background-color: #96bc33;
+  color: white;
+}
+.btn-red {
+  background-color: #ef4e4e;
+  color: white;
+}
+.btn-orange {
+  background-color: #ed941e;
+  color: white;
+}
+
