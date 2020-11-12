@@ -9,6 +9,7 @@
 }
 .icons-group {
   display: flex;
+  align-items: center;
   padding: 5px 25px 5px 0;
   width: 180px;
 }

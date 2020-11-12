@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { BASIC_ICONS } from '../../assets/basic_icons';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -13,7 +13,9 @@ export class IconsComponent implements OnInit {
   fullIconList = [];
   uniqueWidthSet;
 
-  constructor(private sanitizer: DomSanitizer) { }
+  @ViewChildren('svg') svgIcons: QueryList<ElementRef>;
+
+  constructor(private sanitizer: DomSanitizer){ }
 
   ngOnInit(): void {
     for (const [key, value] of Object.entries(BASIC_ICONS)) {
@@ -34,6 +36,7 @@ export class IconsComponent implements OnInit {
     this.iconsList = this.fullIconList.slice();
     this.createWidthSet();
   }
+
   createWidthSet() {
     const widthArr = [];
     for (const item of this.fullIconList) {
@@ -42,6 +45,10 @@ export class IconsComponent implements OnInit {
       }
     }
     this.uniqueWidthSet = new Set(widthArr);
+  }
+
+  getWidthGroup(iconWidth) {
+    return this.iconsList.filter(item => item.width === iconWidth);
   }
 
   onInput(event: any) {
@@ -57,12 +64,15 @@ export class IconsComponent implements OnInit {
     this.createWidthSet();
   }
 
-  getWidthGroup(iconWidth) {
-    return this.iconsList.filter(item => item.width === iconWidth);
-  }
-
   onColorChange(event) {
-    console.log(event.target.value)
+    for (const svg of this.svgIcons) {
+      const svgElement = svg.nativeElement.querySelector('svg');
+      svgElement.style.fill = event.target.value;
+      const svgPath = svgElement.querySelector('path')
+      if (svgPath != null) {
+        svgPath.setAttribute('fill', event.target.value);
+      }
+    }
   }
 
 }
