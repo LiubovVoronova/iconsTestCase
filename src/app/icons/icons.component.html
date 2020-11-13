@@ -10,12 +10,13 @@
     <button class="btn-orange" type="button" value="#ed941e" (click)="onColorChange($event)">Orange</button>
   </div>
 
-  <div class="group-container" *ngFor="let iconWidth of uniqueWidthSet" >
-    <h3 *ngIf="iconsList.length != 0">Size {{ iconWidth }} </h3>
-    <div class="icons-group" *ngFor="let icon of getWidthGroup(iconWidth)">
-      <span #svg class="single-icon" [innerHTML]="icon.tag"></span>
-      <p class="single-icon-name">{{icon.name}}</p>
-    </div>
-  </div>
+  <app-accordion>
+    <app-group *ngFor="let iconWidth of uniqueWidthSet" [title]="iconWidth">
+      <div class="icons-group" *ngFor="let icon of getWidthGroup(iconWidth)">
+        <span #svg class="single-icon" [innerHTML]="icon.tag"></span>
+        <p class="single-icon-name">{{icon.name}}</p>
+      </div>
+    </app-group>
+  </app-accordion>
 
 </div>

@@ -1,0 +1,13 @@
+.content-body {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.content-body.hidden {
+  display: none;
+}
+
+.title {
+
+
+}

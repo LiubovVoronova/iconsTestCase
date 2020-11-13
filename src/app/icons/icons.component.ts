@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import {Component, ElementRef, OnInit, Output, QueryList, ViewChildren} from '@angular/core';
 import { BASIC_ICONS } from '../../assets/basic_icons';
 import { DomSanitizer } from '@angular/platform-browser';
 
@@ -44,6 +44,7 @@ export class IconsComponent implements OnInit {
         widthArr.push(item.width);
       }
     }
+    console.log(this.uniqueWidthSet)
     this.uniqueWidthSet = new Set(widthArr);
   }
 
